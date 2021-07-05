@@ -13,11 +13,11 @@ class BankAccount
   end
 
   def deposit(amount)
-    @transactions << @transaction.new(amount, "credit")
+    @transactions << @transaction.create(amount, "credit")
   end
 
   def withdraw(amount)
-    @transactions << @transaction.new(amount, "debit")
+    @transactions << @transaction.create(amount, "debit")
   end
 
   private

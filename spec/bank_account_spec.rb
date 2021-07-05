@@ -15,16 +15,18 @@ describe BankAccount do
       expect(subject.transactions.length).to eq(1)
     end
     it "creates a new credit transaction" do
-      # TODO Need to mock transaction class.
-      subject.deposit(1000)
-      expect(subject.transactions.first.type).to eq("credit")
+      transaction = class_double("Transaction")
+      bank_account = BankAccount.new(transaction)
+      expect(transaction).to receive(:create).with(1000, "credit")
+      bank_account.deposit(1000)
     end
   end
   describe ".withdraw" do
     it "adds a new debit transaction" do
-      subject.deposit(1000)
-      subject.withdraw(500)
-      expect(subject.transactions.last.type).to eq("debit")
+      transaction = class_double("Transaction")
+      bank_account = BankAccount.new(transaction)
+      expect(transaction).to receive(:create).with(500, "debit")
+      bank_account.withdraw(500)
     end
   end
 end
