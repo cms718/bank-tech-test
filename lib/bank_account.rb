@@ -16,6 +16,10 @@ class BankAccount
     @transactions << @transaction.new(amount, "credit")
   end
 
+  def withdraw(amount)
+    @transactions << @transaction.new(amount, "debit")
+  end
+
   private
 
   def statement_header
