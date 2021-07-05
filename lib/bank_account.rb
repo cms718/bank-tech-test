@@ -1,8 +1,11 @@
+require './lib/transaction'
+
 class BankAccount
   attr_reader :transactions
-  
-  def initialize
+
+  def initialize(transaction=Transaction)
     @transactions = []
+    @transaction = transaction
   end 
   
   def view_statement
@@ -10,7 +13,7 @@ class BankAccount
   end
 
   def deposit(amount)
-    @transactions << { amount: amount, type: "credit" }
+    @transactions << @transaction.new(amount, "credit")
   end
 
   private
