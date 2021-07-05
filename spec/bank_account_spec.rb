@@ -8,4 +8,10 @@ describe BankAccount do
       end
     end
   end
+  describe ".deposit" do
+    it "creates a new transaction" do
+      subject.deposit(1000)
+      expect(subject.transactions.length).to eq(1)
+    end
+  end
 end
