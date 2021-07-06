@@ -1,13 +1,12 @@
 class Transaction
-  attr_reader :amount, :type, :created_at
+  attr_reader :value, :created_at
 
-  def initialize(amount, type, time=Time)
-    @amount = amount
-    @type = type
+  def initialize(value, time=Time)
+    @value = value
     @created_at = time.now
   end
 
-  def self.create(amount, type)
-    Transaction.new(amount, type)
+  def self.create(value)
+    Transaction.new(value)
   end 
 end

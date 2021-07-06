@@ -12,12 +12,12 @@ class BankAccount
     puts statement_header
   end
 
-  def deposit(amount)
-    @transactions << @transaction.create(amount, "credit")
+  def deposit(value)
+    @transactions << @transaction.create(value)
   end
 
-  def withdraw(amount)
-    @transactions << @transaction.create(amount, "debit")
+  def withdraw(value)
+    @transactions << @transaction.create(-value)
   end
 
   private

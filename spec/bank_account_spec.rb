@@ -17,7 +17,7 @@ describe BankAccount do
     it "creates a new credit transaction" do
       transaction = class_double("Transaction")
       bank_account = BankAccount.new(transaction)
-      expect(transaction).to receive(:create).with(1000, "credit")
+      expect(transaction).to receive(:create).with(1000)
       bank_account.deposit(1000)
     end
   end
@@ -25,7 +25,7 @@ describe BankAccount do
     it "adds a new debit transaction" do
       transaction = class_double("Transaction")
       bank_account = BankAccount.new(transaction)
-      expect(transaction).to receive(:create).with(500, "debit")
+      expect(transaction).to receive(:create).with(-500)
       bank_account.withdraw(500)
     end
   end

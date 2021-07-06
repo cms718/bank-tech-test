@@ -3,18 +3,12 @@ require 'transaction'
 describe Transaction do
   before(:each) do
     time = class_double("Time", :now => "05/07/2021") 
-    @transaction = Transaction.new(1000, "debit", time)    
+    @transaction = Transaction.new(1000, time)    
   end
   
-  describe '.amount' do 
+  describe '.value' do 
     it 'stores the value of the transaction' do
-      expect(@transaction.amount).to eq(1000)
-    end
-  end
-  
-  describe '.type' do
-    it 'stores either credit or debit' do
-      expect(@transaction.type).to eq("debit")
+      expect(@transaction.value).to eq(1000)
     end
   end
 
