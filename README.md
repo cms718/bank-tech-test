@@ -32,7 +32,7 @@ date || credit || debit || balance
 
 1. Clone the repo
    ```
-   git clone https://github.com/cms2718/Project-Name.git
+   git clone https://github.com/cms718/bank-tech-test
    ```
 2. cd into directory then:
    ```
