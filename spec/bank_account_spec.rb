@@ -57,5 +57,10 @@ describe BankAccount do
     it "raises an error when balance is less than value to withdraw" do
       expect { @bank_account.withdraw(2000) }.to raise_error "Insufficient funds"
     end
+
+    it "reduces the total balance from the statement" do
+      @bank_account.withdraw(1000)
+      expect(@bank_account.statement.last[:balance]).to eq(0)
+    end
   end
 end
