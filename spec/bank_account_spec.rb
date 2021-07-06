@@ -62,5 +62,10 @@ describe BankAccount do
       @bank_account.withdraw(1000)
       expect(@bank_account.statement.last[:balance]).to eq(0)
     end
+
+    it "adds a new debit transaction to the statement" do
+      @bank_account.withdraw(1000)
+      expect(@bank_account.statement.last[:type]).to eq("debit")
+    end
   end
 end

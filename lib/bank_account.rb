@@ -39,8 +39,9 @@ class BankAccount
   def update_statement(transaction)
     @statement << { 
       date: transaction.created_at, 
-      type: "credit", 
+      type: transaction.value > 0 ? "credit" : "debit",
       value: transaction.value, 
-      balance: current_balance + transaction.value }
+      balance: current_balance + transaction.value 
+    }
   end
 end
