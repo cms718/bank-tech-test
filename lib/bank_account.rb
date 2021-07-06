@@ -16,16 +16,28 @@ class BankAccount
   def deposit(value)
     transaction = @transaction.create(value)
     @transactions << transaction
-    @statement << { date: transaction.created_at, type: "credit", value: value, balance: value }
+    update_statement(transaction)
   end
-
+  
   def withdraw(value)
     @transactions << @transaction.create(-value)
   end
-
+  
   private
-
+  
   def statement_header
     "date || credit || debit || balance"
+  end
+  
+  def current_balance
+    @statement.last ? @statement.last[:balance] : 0
+  end
+
+  def update_statement(transaction)
+    @statement << { 
+      date: transaction.created_at, 
+      type: "credit", 
+      value: transaction.value, 
+      balance: current_balance + transaction.value }
   end
 end

@@ -28,6 +28,12 @@ describe BankAccount do
       @bank_account.deposit(1000)
       expect(@bank_account.statement.first[:balance]).to eq(1000)
     end
+    
+    it "updates the statements balance after multiple deposits" do
+      @bank_account.deposit(1000)
+      @bank_account.deposit(1000)
+      expect(@bank_account.statement.last[:balance]).to eq(2000)
+    end
   end
 
   describe ".withdraw" do
