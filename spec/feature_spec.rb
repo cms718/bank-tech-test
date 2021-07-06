@@ -8,7 +8,7 @@ describe BankAccount do
       subject.deposit(2000)
       subject.withdraw(500)
       expect { subject.view_statement }
-      .to output("date || credit || debit || balance\n06/07/2021 || 1000 || || 1000\n06/07/2021 || 2000 || || 3000\n06/07/2021 || || 500 || 2500\n")
+      .to output("date || credit || debit || balance\n06/07/2021 || || 500 || 2500\n06/07/2021 || 2000 || || 3000\n06/07/2021 || 1000 || || 1000\n")
       .to_stdout
     end
   end

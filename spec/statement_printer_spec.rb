@@ -33,7 +33,7 @@ describe StatementPrinter do
             balance: 2000.00
           } 
         ]
-        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.0 || || 1000.0\n01/01/2000 || 1000.0 || || 2000.0\n"
+        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.0 || || 2000.0\n01/01/2000 || 1000.0 || || 1000.0\n"
         expect { StatementPrinter.run(statement) }.to output(expected_result).to_stdout
       end
     end
@@ -53,7 +53,7 @@ describe StatementPrinter do
           balance: 500.00
         } 
       ]
-        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.0 || || 1000.0\n01/01/2000 || || 500.0 || 500.0\n"
+        expected_result = "date || credit || debit || balance\n01/01/2000 || || 500.0 || 500.0\n01/01/2000 || 1000.0 || || 1000.0\n"
         expect { StatementPrinter.run(statement) }.to output(expected_result).to_stdout
       end
     end

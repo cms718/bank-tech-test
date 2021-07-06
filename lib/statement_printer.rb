@@ -1,7 +1,7 @@
 class StatementPrinter
   def self.run(statement)
     puts "date || credit || debit || balance"
-    statement.each do |transaction|
+    statement.reverse.each do |transaction|
         if transaction[:type] == "credit"
           puts "#{transaction[:date].strftime("%d/%m/%Y")} || #{transaction[:value]} || || #{transaction[:balance]}"
         else
