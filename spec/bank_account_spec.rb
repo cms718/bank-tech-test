@@ -11,17 +11,22 @@ describe BankAccount do
   end
 
   describe ".deposit" do
-    
+
     before(:each) do
       transaction = class_double("Transaction")
-      bank_account = BankAccount.new(transaction)
-      mock_new_transaction = double("Transaction", :value => 1000)
+      @bank_account = BankAccount.new(transaction)
+      mock_new_transaction = double("Transaction", :value => 1000, :created_at => "01/01/2000")
       allow(transaction).to receive(:create).with(1000).and_return(mock_new_transaction)
     end
     
     it "adds a new transaction to transactions" do
-      subject.deposit(1000)
-      expect(subject.transactions.first.value).to eq(1000)
+      @bank_account.deposit(1000)
+      expect(@bank_account.transactions.first.value).to eq(1000)
+    end
+
+    it "updates the statement with the new transaction" do
+      @bank_account.deposit(1000)
+      expect(@bank_account.statement.first[:balance]).to eq(1000)
     end
   end
 

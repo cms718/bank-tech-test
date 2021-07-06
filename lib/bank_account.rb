@@ -1,11 +1,12 @@
 require './lib/transaction'
 
 class BankAccount
-  attr_reader :transactions
+  attr_reader :transactions, :statement
 
   def initialize(transaction=Transaction)
     @transactions = []
     @transaction = transaction
+    @statement = []
   end 
   
   def view_statement
@@ -13,7 +14,9 @@ class BankAccount
   end
 
   def deposit(value)
-    @transactions << @transaction.create(value)
+    transaction = @transaction.create(value)
+    @transactions << transaction
+    @statement << { date: transaction.created_at, type: "credit", value: value, balance: value }
   end
 
   def withdraw(value)
