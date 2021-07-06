@@ -1,20 +1,10 @@
 require 'bank_account'
 
 describe BankAccount do
-  # TODO move test to a StatementPrinter - formats etc
-  describe ".view_statement" do
-    context "for a new bank account" do
-      it "displays an empty bank statement" do
-        expect { subject.view_statement }.to output("date || credit || debit || balance\n").to_stdout
-      end
-    end
-  end
-
   describe ".deposit" do
-
     before(:each) do
       transaction = class_double("Transaction")
-      @bank_account = BankAccount.new(transaction)
+      @bank_account = BankAccount.new(transaction: transaction)
       mock_credit_transaction = double("Transaction", :value => 1000, :created_at => "01/01/2000")
       allow(transaction).to receive(:create).with(1000).and_return(mock_credit_transaction)
     end
@@ -37,11 +27,10 @@ describe BankAccount do
   end
 
   describe ".withdraw" do
-
     before(:each) do
       # Long mocking to deposit credit transaction before making debit transaction
       transaction = class_double("Transaction")
-      @bank_account = BankAccount.new(transaction)
+      @bank_account = BankAccount.new(transaction: transaction)
       mock_credit_transaction = double("Transaction", :value => 1000, :created_at => "01/01/2000")
       mock_debit_transaction = double("Transaction", :value => -1000, :created_at => "01/01/2000")
       allow(transaction).to receive(:create).with(1000).and_return(mock_credit_transaction)
@@ -66,6 +55,15 @@ describe BankAccount do
     it "adds a new debit transaction to the statement" do
       @bank_account.withdraw(1000)
       expect(@bank_account.statement.last[:type]).to eq("debit")
+    end
+  end
+
+  describe '.view_statement' do
+    it "calls run on the statement printer" do
+      statement_printer = class_double("StatementPrinter")
+      bank_account = BankAccount.new(statement_printer: statement_printer)
+      expect(statement_printer).to receive(:run)
+      bank_account.view_statement
     end
   end
 end

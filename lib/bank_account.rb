@@ -1,16 +1,18 @@
 require './lib/transaction'
+require './lib/statement_printer'
 
 class BankAccount
   attr_reader :transactions, :statement
 
-  def initialize(transaction=Transaction)
+  def initialize(transaction: Transaction, statement_printer: StatementPrinter)
     @transactions = []
     @transaction = transaction
     @statement = []
+    @statement_printer = statement_printer
   end 
   
   def view_statement
-    puts statement_header
+    @statement_printer.run(@statement)
   end
 
   def deposit(value)
