@@ -30,10 +30,6 @@ class BankAccount
   
   private
   
-  def statement_header
-    "date || credit || debit || balance"
-  end
-  
   def current_balance
     @statement.last ? @statement.last[:balance] : 0
   end
