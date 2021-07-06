@@ -49,7 +49,7 @@ describe StatementPrinter do
         { 
           date: "01/01/2000", 
           type: "debit",
-          value: 500.00, 
+          value: -500.00, 
           balance: 500.00
         } 
       ]

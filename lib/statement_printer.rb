@@ -5,7 +5,7 @@ class StatementPrinter
         if transaction[:type] == "credit"
           puts "#{transaction[:date]} || #{transaction[:value]} || || #{transaction[:balance]}"
         else
-          puts "#{transaction[:date]} || || #{transaction[:value]} || #{transaction[:balance]}"
+          puts "#{transaction[:date]} || || #{transaction[:value].abs} || #{transaction[:balance]}"
         end
     end
   end
