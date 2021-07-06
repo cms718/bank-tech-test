@@ -37,5 +37,25 @@ describe StatementPrinter do
         expect { StatementPrinter.run(statement) }.to output(expected_result).to_stdout
       end
     end
+
+    context "for debit transactions" do
+      it "prints the formatted statement" do
+        statement = [{ 
+          date: "01/01/2000", 
+          type: "credit",
+          value: 1000.00, 
+          balance: 1000.00 
+        },
+        { 
+          date: "01/01/2000", 
+          type: "debit",
+          value: 500.00, 
+          balance: 500.00
+        } 
+      ]
+        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.0 || || 1000.0\n01/01/2000 || || 500.0 || 500.0\n"
+        expect { StatementPrinter.run(statement) }.to output(expected_result).to_stdout
+      end
+    end
   end
 end
