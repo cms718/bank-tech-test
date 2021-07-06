@@ -1,8 +1,8 @@
 class StatementPrinter
   def self.run(statement)
     puts "date || credit || debit || balance"
-    if statement.any?
-      puts "#{statement[0][:date]} || #{statement[0][:value]} || || #{statement[0][:balance]}"
+    statement.each do |transaction|
+        puts "#{transaction[:date]} || #{transaction[:value]} || || #{transaction[:balance]}"
     end
   end
 end
