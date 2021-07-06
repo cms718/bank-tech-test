@@ -3,9 +3,9 @@ class StatementPrinter
     puts "date || credit || debit || balance"
     statement.each do |transaction|
         if transaction[:type] == "credit"
-          puts "#{transaction[:date]} || #{transaction[:value]} || || #{transaction[:balance]}"
+          puts "#{transaction[:date].strftime("%d/%m/%Y")} || #{transaction[:value]} || || #{transaction[:balance]}"
         else
-          puts "#{transaction[:date]} || || #{transaction[:value].abs} || #{transaction[:balance]}"
+          puts "#{transaction[:date].strftime("%d/%m/%Y")} || || #{transaction[:value].abs} || #{transaction[:balance]}"
         end
     end
   end

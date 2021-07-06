@@ -10,7 +10,7 @@ describe StatementPrinter do
     context "for credit transactions" do
       it "prints the formatted statement with 1 transaction" do
         statement = [{ 
-          date: "01/01/2000", 
+          date: Time.new(2000,"jan",1,20,15,1), 
           type: "credit",
           value: 1000.00, 
           balance: 1000.00 
@@ -21,13 +21,13 @@ describe StatementPrinter do
         
         it "prints the formatted statement with 2 transactions" do
           statement = [{ 
-            date: "01/01/2000", 
+            date: Time.new(2000,"jan",1,20,15,1), 
             type: "credit",
             value: 1000.00, 
             balance: 1000.00 
           },
           { 
-            date: "01/01/2000", 
+            date: Time.new(2000,"jan",1,20,15,1), 
             type: "credit",
             value: 1000.00, 
             balance: 2000.00
@@ -41,13 +41,13 @@ describe StatementPrinter do
     context "for debit transactions" do
       it "prints the formatted statement" do
         statement = [{ 
-          date: "01/01/2000", 
+          date: Time.new(2000,"jan",1,20,15,1), 
           type: "credit",
           value: 1000.00, 
           balance: 1000.00 
         },
         { 
-          date: "01/01/2000", 
+          date: Time.new(2000,"jan",1,20,15,1), 
           type: "debit",
           value: -500.00, 
           balance: 500.00
