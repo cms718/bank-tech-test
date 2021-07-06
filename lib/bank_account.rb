@@ -20,6 +20,7 @@ class BankAccount
   end
   
   def withdraw(value)
+    raise "Insufficient funds" if current_balance < value
     @transactions << @transaction.create(-value)
   end
   
