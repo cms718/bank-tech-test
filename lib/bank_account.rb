@@ -8,7 +8,7 @@ class BankAccount
 
   def initialize(transaction: Transaction, statement_printer: StatementPrinter)
     @transactions = []
-    @transaction = transaction
+    @transaction_class = transaction
     @statement = []
     @statement_printer = statement_printer
   end
@@ -18,7 +18,7 @@ class BankAccount
   end
 
   def deposit(value)
-    transaction = @transaction.create(value)
+    transaction = @transaction_class.create(value)
     @transactions << transaction
     update_statement(transaction)
   end
@@ -26,7 +26,7 @@ class BankAccount
   def withdraw(value)
     raise 'Insufficient funds' if current_balance < value
 
-    transaction = @transaction.create(-value)
+    transaction = @transaction_class.create(-value)
     @transactions << transaction
     update_statement(transaction)
   end
