@@ -9,18 +9,16 @@ class BankAccount
   def initialize(transaction: Transaction, statement_printer: StatementPrinter)
     @transactions = []
     @transaction_class = transaction
-    @statement = []
     @statement_printer = statement_printer
   end
 
   def view_statement
-    @statement_printer.run(@statement)
+    @statement_printer.run(@transactions)
   end
 
   def deposit(value)
     transaction = @transaction_class.create(value)
     @transactions << transaction
-    update_statement(transaction)
   end
 
   def withdraw(value)
@@ -28,21 +26,13 @@ class BankAccount
 
     transaction = @transaction_class.create(-value)
     @transactions << transaction
-    update_statement(transaction)
   end
 
   private
 
   def current_balance
-    @statement.last ? @statement.last[:balance] : 0
-  end
-
-  def update_statement(transaction)
-    @statement << {
-      date: transaction.created_at,
-      type: transaction.value.positive? ? 'credit' : 'debit',
-      value: transaction.value,
-      balance: current_balance + transaction.value
-    }
+    balance = 0
+    @transactions.each { |transaction| balance += transaction.value }
+    balance
   end
 end

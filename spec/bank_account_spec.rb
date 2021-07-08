@@ -15,17 +15,6 @@ describe BankAccount do
       @bank_account.deposit(1000)
       expect(@bank_account.transactions.first.value).to eq(1000)
     end
-
-    it 'updates the statement with the new transaction' do
-      @bank_account.deposit(1000)
-      expect(@bank_account.statement.first[:balance]).to eq(1000)
-    end
-
-    it 'updates the statements balance after multiple deposits' do
-      @bank_account.deposit(1000)
-      @bank_account.deposit(1000)
-      expect(@bank_account.statement.last[:balance]).to eq(2000)
-    end
   end
 
   describe '.withdraw' do
@@ -47,16 +36,6 @@ describe BankAccount do
 
     it 'raises an error when balance is less than value to withdraw' do
       expect { @bank_account.withdraw(2000) }.to raise_error 'Insufficient funds'
-    end
-
-    it 'reduces the total balance from the statement' do
-      @bank_account.withdraw(1000)
-      expect(@bank_account.statement.last[:balance]).to eq(0)
-    end
-
-    it 'adds a new debit transaction to the statement' do
-      @bank_account.withdraw(1000)
-      expect(@bank_account.statement.last[:type]).to eq('debit')
     end
   end
 
