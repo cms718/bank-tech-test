@@ -18,14 +18,14 @@ describe StatementPrinter do
 
     context 'for credit transactions' do
       it 'prints the formatted statement with 1 transaction' do
-        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.0 || || 1000.0\n"
+        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.00 || || 1000.00\n"
         transactions = [@mock_credit_transaction] 
         expect { StatementPrinter.run(transactions) }.to output(expected_result).to_stdout
       end
 
       it 'prints the formatted statement with 2 transactions' do
         transactions = [@mock_credit_transaction, @mock_credit_transaction]
-        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.0 || || 2000.0\n01/01/2000 || 1000.0 || || 1000.0\n"
+        expected_result = "date || credit || debit || balance\n01/01/2000 || 1000.00 || || 2000.00\n01/01/2000 || 1000.00 || || 1000.00\n"
         expect { StatementPrinter.run(transactions) }.to output(expected_result).to_stdout
       end
     end
@@ -33,7 +33,7 @@ describe StatementPrinter do
     context 'for debit transactions' do
       it 'prints the formatted statement' do
         transactions = [@mock_credit_transaction, @mock_debit_transaction]
-        expected_result = "date || credit || debit || balance\n01/01/2000 || || 500.0 || 500.0\n01/01/2000 || 1000.0 || || 1000.0\n"
+        expected_result = "date || credit || debit || balance\n01/01/2000 || || 500.00 || 500.00\n01/01/2000 || 1000.00 || || 1000.00\n"
         expect { StatementPrinter.run(transactions) }.to output(expected_result).to_stdout
       end
     end
